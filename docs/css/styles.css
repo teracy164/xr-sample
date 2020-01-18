@@ -1,0 +1,24 @@
+html body {
+    padding: 0;
+    margin: 0;
+}
+
+button {
+    padding: 10px;
+    border-radius: 10px;
+    background-color: skyblue;
+}
+
+button.not-supported {
+    background-color: lightgray;
+}
+
+.supported-msg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 5px 20px;
+    margin: 5px;
+    background-color: coral;
+    border-radius: 20px;
+}

@@ -1,0 +1,72 @@
+<html>
+
+<head>
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
+	<script src="js/xr-util.js"></script>
+	<script>
+		const xr = new XrUtil();
+
+		const setStartBtnStatus = (elName, isSupported) => {
+			const el = document.getElementById(elName);
+			if (isSupported) {
+				el.classList.remove('not-supported');
+				el.disabled = '';
+			} else {
+				el.classList.add('not-supported');
+				el.disabled = 'true';
+			}
+		}
+
+		window.onload = (event) => {
+			xr.init().then(() => {
+				setStartBtnStatus('btn-start-inline', xr.support.inline);
+				setStartBtnStatus('btn-start-vr', xr.support.xr);
+				setStartBtnStatus('btn-start-ar', xr.support.ar);
+			});
+		}
+
+		const startXR = async (mode) => {
+			if (await xr.start(mode)) {
+				document.getElementById('area-start-btn').style.display = 'none';
+				document.getElementById('area-ctrl-btn').style.display = '';
+			} else {
+				alert('failed');
+			}
+		}
+		const onClickStartInline = () => startXR(XR_MODE_INLINE);
+		const onClickStartVR = () => startXR(XR_MODE_VR);
+		const onClickStartAR = () => startXR(XR_MODE_AR);
+		const onClickEnd = () => {
+			xr.end();
+			document.getElementById('area-start-btn').style.display = '';
+			document.getElementById('area-ctrl-btn').style.display = 'none';
+		}
+		const onClickPlay = () => {
+			document.getElementById('youtube').style.display = '';
+			xr.play();
+		}
+	</script>
+</head>
+
+<body>
+	<div style="width: 100vw; height: 100vh">
+		<div style="height: 33%"> </div>
+		<div style="height: 33%; text-align: center;">
+			<div id="area-start-btn">
+				<button id="btn-start-inline" class="not-supported" onclick="onClickStartInline()" disabled>start inline</button>
+				<button id="btn-start-vr" class="not-supported" onclick="onClickStartVR()" disabled>start VR</button id="btn-start-inline">
+				<button id="btn-start-ar" class="not-supported" onclick="onClickStartAR()" disabled>start AR</button id="btn-start-ar">
+			</div>
+			<div id="area-ctrl-btn" style="display: none;">
+				<button onclick="onClickPlay()">play</button>
+				<button onclick="onClickEnd()">end</button>
+			</div>
+			<div style="height: 33%"> </div>
+		</div>
+	</div>
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/wi2_cyJGzrg" frameborder="0"
+		allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen
+		id="youtube" style="display: none;position: absolute; top:0;left:0;width: 100vw; height: 100vh;"></iframe>
+</body>
+
+</html>
