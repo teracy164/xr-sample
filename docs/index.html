@@ -29,6 +29,8 @@
 			if (await xr.start(mode)) {
 				document.getElementById('area-start-btn').style.display = 'none';
 				document.getElementById('area-ctrl-btn').style.display = '';
+
+				document.getElementById('youtube').style.display = '';
 			} else {
 				alert('failed');
 			}
@@ -40,10 +42,6 @@
 			xr.end();
 			document.getElementById('area-start-btn').style.display = '';
 			document.getElementById('area-ctrl-btn').style.display = 'none';
-		}
-		const onClickPlay = () => {
-			document.getElementById('youtube').style.display = '';
-			xr.play();
 		}
 	</script>
 </head>
@@ -58,7 +56,6 @@
 				<button id="btn-start-ar" class="not-supported" onclick="onClickStartAR()" disabled>start AR</button id="btn-start-ar">
 			</div>
 			<div id="area-ctrl-btn" style="display: none;">
-				<button onclick="onClickPlay()">play</button>
 				<button onclick="onClickEnd()">end</button>
 			</div>
 			<div style="height: 33%"> </div>

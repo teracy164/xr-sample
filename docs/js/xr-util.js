@@ -32,6 +32,9 @@ class XrUtil {
     async start(mode) {
         try {
             this.session = await navigator.xr.requestSession(mode);
+            this.requestID = this.session.requestAnimationFrame((time, xrFrame) => {
+                console.log(time, xrFrame);
+            })
             return true;
         } catch (err) {
             console.log(err);
@@ -46,14 +49,4 @@ class XrUtil {
         }
     }
 
-    async play() {
-        try {
-            this.requestID = this.session.requestAnimationFrame((time, xrFrame) => {
-                console.log(time, xrFrame);
-            })
-        } catch (err) {
-            console.log(err);
-
-        }
-    }
 }
