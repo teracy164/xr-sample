@@ -20,7 +20,7 @@
 		window.onload = (event) => {
 			xr.init().then(() => {
 				setStartBtnStatus('btn-start-inline', xr.support.inline);
-				setStartBtnStatus('btn-start-vr', xr.support.xr);
+				setStartBtnStatus('btn-start-vr', xr.support.vr);
 				setStartBtnStatus('btn-start-ar', xr.support.ar);
 			});
 		}
