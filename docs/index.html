@@ -22,8 +22,11 @@
 
 		window.onload = (event) => {
 			xr.init().then(() => {
-				alert(JSON.stringify(xr.support))
-				setStartBtnStatus('btn-start-vr', xr.support.vr);
+				if (xr.support.vr) {
+					setStartBtnStatus('btn-start-vr', xr.support.vr);
+				} else {
+					alert('VR not supported.');
+				}
 			});
 		}
 
