@@ -22,8 +22,10 @@ class XrUtil {
         this.support.vr = result[1];
         this.support.ar = result[2];
 
+        /*
         this.scene = new Scene();
         this.scene.addNode(new Gltf2Node({url: 'media/gltf/space/space.gltf'}));
+        */
     }
 
     async isSupported(mode) {
@@ -35,27 +37,25 @@ class XrUtil {
         }
     }
 
-    async start(mode) {
+    async startVR() {
         try {
-            this.session = await navigator.xr.requestSession(mode);
+            this.session = await navigator.xr.requestSession(XR_MODE_VR);
 
             this.session.addEventListener('end', {/* TODO */ });
 
-            this.renderer = null;
+            /*
+            this.gl = createWebGLContext({ xrCompatible: true });
 
-            if (mode === XR_MODE_VR) {
-                this.gl = createWebGLContext({ xrCompatible: true });
+            this.renderer = new Renderer(gl);
+            this.scene.setRenderer(renderer);
 
-                this.renderer = new Renderer(gl);
-                this.scene.setRenderer(renderer);
+            this.session.updateRenderState({ baseLayer: new XRWebGLLayer(session, gl) });
 
-                this.session.updateRenderState({ baseLayer: new XRWebGLLayer(session, gl) });
-
-                this.session.requestReferenceSpace('local').then((refSpace) => {
-                    this.xrRefSpace = refSpace;
-                    this.session.requestAnimationFrame(onXRFrame);
-                });
-            }
+            this.session.requestReferenceSpace('local').then((refSpace) => {
+                this.xrRefSpace = refSpace;
+                this.session.requestAnimationFrame(onXRFrame);
+            });
+            */
 
             return true;
         } catch (err) {
@@ -71,6 +71,7 @@ class XrUtil {
         }
     }
 
+    /*
     onXRFrame(t, frame) {
         this.scene.startFrame();
         frame.session.requestAnimationFrame(this.onXRFrame);
@@ -85,4 +86,5 @@ class XrUtil {
     render() {
         renderer.render(scene, camera);
     }
+    */
 }

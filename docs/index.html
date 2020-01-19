@@ -25,15 +25,15 @@
 			});
 		}
 
-		const startXR = async (mode) => {
-			if (await xr.start(mode)) {
+		const onClickStartVR = async () => {
+			if (await xr.startVR()) {
 				document.getElementById('area-start-btn').style.display = 'none';
 				document.getElementById('area-ctrl-btn').style.display = '';
 			} else {
 				alert('failed');
 			}
-		}
-		const onClickStartVR = () => startXR(XR_MODE_VR);
+		};
+
 		const onClickEnd = () => {
 			xr.end();
 			document.getElementById('area-start-btn').style.display = '';
@@ -43,17 +43,12 @@
 </head>
 
 <body>
-	<div style="width: 100vw; height: 100vh">
-		<div style="height: 33%"> </div>
-		<div style="height: 33%; text-align: center;">
-			<div id="area-start-btn">
-				<button id="btn-start-vr" class="not-supported" onclick="onClickStartVR()" disabled>start VR</button
-					id="btn-start-inline">
-			</div>
-			<div id="area-ctrl-btn" style="display: none;">
-				<button onclick="onClickEnd()">end</button>
-			</div>
-			<div style="height: 33%"> </div>
+	<div style="width: 100vw; height: 100vh; text-align: center">
+		<div id="area-start-btn">
+			<button id="btn-start-vr" class="not-supported" onclick="onClickStartVR()" disabled>start VR</button>
+		</div>
+		<div id="area-ctrl-btn" style="display: none;">
+			<button onclick="onClickEnd()">end</button>
 		</div>
 	</div>
 </body>
