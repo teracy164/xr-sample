@@ -22,6 +22,7 @@
 
 		window.onload = (event) => {
 			xr.init().then(() => {
+				alert(JSON.stringify(xr.support))
 				setStartBtnStatus('btn-start-vr', xr.support.vr);
 			});
 		}
